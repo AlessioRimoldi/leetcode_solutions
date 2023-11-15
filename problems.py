@@ -756,18 +756,87 @@ def minWindow(s,t):
         return "" if len(result) == m+1 else result
                 
 
-#s = "ADOBECODEBANC"; t = "ABC"
-# s = "abc"; t = "bc"
-
-# print(minWindow(s,t))
-
-import numpy as np
-
+def reverseWords(s):
     
-b = np.array([3,0,0,0])
-A = np.array([[8,4,2],[12,4,1],[512,64,8],[192,16,1]])
+    s = s.strip()
+    s = s.split(' ')
+    s = list(filter(('').__ne__, s))
+    s = ' '.join(reversed(s))
+    return s
 
-print(np.linalg.lstsq(A,b))
+def ZigZag(s, nrows):
     
+    if nrows == 1: return s
     
+    res = ""
+    for r in range(nrows):
+        increment = (nrows-1)*2
+        for i in range(r,len(s),increment):
+            res += s[i]
+            if (r > 0 and r < nrows -1 and i +increment - 2*r < len(s)):
+                res+=s[i+increment-2*r]      
+    return res
+     
+
+def first(haystack,needle):
+    
+        n,h = len(needle), len(haystack)
+        if n > h or ( n == h and needle != haystack): return -1
+        if  needle == haystack: return 0
+        l=0
+        
+        while l < h-n+1:
+        
+        
+            if haystack[l] == needle[0]:
+                r = 1
+                while r < n:
+                
+                    if haystack[l+r] == needle[r]:
+                        r+=1
+                    else:
+                        break
+                if r == n:
+                    return l
+            l+=1            
+                
+        return -1            
+               
+
+def ValidSudoku(board):
+    
+    pos={f'{i}':[] for i in range(9)}
+    
+    for i in range(9):
+        for j in range(9):
+            if board[i][j] in pos.keys():
+                pos[board[i][j]].append([i,j])  
+    
+    for key in list(pos.keys()):
+        
+        # checking the rows
+        if pos[key] == []:
+            pass
+        else:
+              
+            
+            
+    
+    return pos
+
+board = [["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+
+print(ValidSudoku(board))
+    
+       
+        
+        
     
